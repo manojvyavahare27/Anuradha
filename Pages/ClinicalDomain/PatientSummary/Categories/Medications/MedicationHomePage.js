@@ -39,13 +39,11 @@ class MedicationHomePage
         this.btnAddPathway=page.getByLabel('alertIconButton').nth(1)
         this.btnClosePopup=page.getByLabel('cancelIcon')
 
-
         //Added medication details  
         this.btnMedicationHistory=page.locator("xpath=//img[@alt='Category History']")
         this.btnSgvExpandMedication=page.locator("xpath=//button[@aria-label='expandRowIconundefined']//*[name()='svg']//*[name()='path' and contains(@d,'M15.08 9.5')]")
         this.btnSvgExpandMedicationHistory=page.locator("xpath=//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1v1x2mb']//*[name()='svg']")
-
-        
+  
 
     }
     async clickOnBtnCategories()
