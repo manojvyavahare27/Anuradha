@@ -1,0 +1,79 @@
+{
+  "loginDetails": [
+    {
+      "username": "prerelease.auto",
+      "password": "Manoj@2023"
+    },
+    {
+      "username": "manoj.auto",
+      "password": "Manoj@2023"
+    }
+  ],
+  "PatientDetails": [
+    {
+      "pat_hospital_ref": "hosp2305Id006",
+      "pat_title": "B/O",
+      "pat_firstname": "detailsa",
+      "pat_surname": "Riomedtest",
+      "pat_sex": "M",
+      "pat_dob": "02/09/2023",
+      "pat_marital_status": "Single",
+      "pat_ethnicity_text": "Indian",
+      "pat_occupation": "Trainer",
+      "pat_notes": "Added for Testing",
+      "pat_type": "Regular",
+      "pat_maiden_name": "Pune",
+      "pat_blood_group": "B+",
+      "pat_religion": "Hindu",
+      "pat_middlename": "Martin",
+      "pat_registered_disabled_yes": "No",
+      "pat_registered_disabled": 0,
+      "pat_currently_pregnant_yes": "No",
+      "pat_currently_pregnant": 0,
+      "pat_language": "English",
+      "pat_temp_address_start": "01-04-2023",
+      "pat_country_of_birth": "India",
+      "pat_gender_at_birth": "M",
+      "pat_nationality": "Indian",
+      "pat_prisoner_yes": "No",
+      "pat_county_of_birth": "Maharashtra",
+      "pat_town_of_birth": "Pune",
+      "pat_sexual_orientation_eli_text": "Heterosexuality",
+      "pat_disability_note": "For Testing"
+    }
+  ],
+  "MedicationCategory": [],
+  "AddMedication": [
+    {
+      "pacr_category": "Medication",
+      "pacr_que_name": "Metformin 500mg tablets",
+      "medi_dose": "2",
+      "medi_frequency": "12 Hours",
+      "medi_method": "Oral",
+      "medi_route": "Oral",
+      "medi_duration": "2",
+      "medi_start_date": "16/04/2024",
+      "medi_stop_date": "18/04/2024",
+      "medi_status": "Current",
+      "medi_prescribed_by": "GP",
+      "medi_notes": "Added notes for testing"
+    }
+  ],
+  "EditMedication": [
+    {
+      "pacr_category": "Medication",
+      "pacr_que_name": "Metformin 500mg tablets",
+      "medi_dose": "2",
+      "medi_frequency": "24 Hours",
+      "medi_method": "Oral",
+      "medi_route": "Oral",
+      "medi_duration": "2",
+      "medi_start_date": "17/04/2024",
+      "medi_stop_date": "19/04/2024",
+      "medi_status": "Prescribed",
+      "medi_prescribed_by": "Hospital consultant",
+      "medi_notes": "Updated notes for testing"
+    }
+  ],
+  "MedicationEDS": []
+}

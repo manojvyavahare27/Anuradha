@@ -1,0 +1,17 @@
+[
+  {
+    "pod_id": 226,
+    "pod_est_id": 4,
+    "pod_pat_id": 787565,
+    "pod_cause_of_death_type_eli_id": 7064,
+    "pod_cause_of_death_type_eli_text": "Cancer",
+    "pod_cause": "Candidal sepsis",
+    "pod_cause_code": "B37.7",
+    "pod_cause_code_type": "icd10",
+    "pod_created_by": "prerelease.auto",
+    "pod_created": "2024-04-16T14:41:06.000Z",
+    "pod_deleted_by": null,
+    "pod_deleted": null,
+    "pod_record_status": "approved"
+  }
+]
