@@ -303,7 +303,7 @@ test.describe('Excel Conversion', () => {
         await addgp.clickOnAddGPBtn();
 
         // Add GP
-       // await page.pause()
+       
         await addgp.enterGPTitle(jsonData.addGP[index].egp_title);
         await addgp.enterGPInitials(jsonData.addGP[index].egp_initials);
         await addgp.enterGPGivenName(jsonData.addGP[index].egp_first_name);
