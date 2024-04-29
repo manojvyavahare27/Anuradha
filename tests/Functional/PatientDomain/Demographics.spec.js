@@ -143,9 +143,7 @@ test.describe("Login Tests", () => {
     await editpatient.clickOnPatientDetails()
     await editpatient.clickOnPatientAddress() 
     await editpatient.clickOnPatientDetails()
-   // await page.pause()
       
-    
     // await expect(page.getByText('Sex required')).toHaveText('Sex required')
     // await expect(page.getByText('Ethnicity required')).toHaveText('Ethnicity required')
     // await expect(page.getByText('Religion required')).toHaveText('Religion required')
