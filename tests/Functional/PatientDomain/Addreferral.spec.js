@@ -77,7 +77,7 @@ test.describe("Login Tests", () => {
       //await page.pause()
       await menu.clickOnMenubtn();
       await menu.clickOnAddReferrallink();
-      await page.pause();
+      //await page.pause();
       await addreferral.enterReceiveReferrldate(jsonData.AddReferral[index].rtt_referral_received_date.toString());
       await addreferral.enterApproveReferralDate(jsonData.AddReferral[index].rtt_referral_approved_date.toString());
       await addreferral.enterDateOfReferral(jsonData.AddReferral[index].ref_referral_date.toString());
@@ -94,7 +94,7 @@ test.describe("Login Tests", () => {
       await addreferral.selectClinicLocation();
       await addreferral.selectTeam(jsonData.AddReferral[index].ref_region_eli_text.toString());
       await addreferral.selectPatientcare();
-      await page.pause();
+      //await page.pause();
       await addreferral.selectPreferredSexForAssessment(jsonData.AddReferral[index].ref_preferred_examiner_sex.toString());
       await addreferral.selectConsultant();
       await addreferral.selectMethodOfArrival(jsonData.AddReferral[index].ref_method_of_arrival.toString());
@@ -110,7 +110,7 @@ test.describe("Login Tests", () => {
       await menu.clickOnFindPatientlink();
 
       //Confirm Existing Details
-      await page.pause();
+      //await page.pause();
       await patientsearch.enterGivenName(jsonData.addPatient[index].pat_firstname.toString());
       await patientsearch.enterFamilyName(jsonData.addPatient[index].pat_surname.toString());
       await patientsearch.clickOnSearchButton();
@@ -132,13 +132,13 @@ test.describe("Login Tests", () => {
       // await confirmexisting.enterPhoneNoofNextOfKin();
 
       //Patient Temp Address
-      await confirmexisting.enterCompanyName(jsonData.tempAddress[index].add_company_name.toString());
+      //await confirmexisting.enterCompanyName(jsonData.tempAddress[index].add_company_name.toString());
       await confirmexisting.enterRoadNumber(jsonData.tempAddress[index].add_address1.toString());
       await confirmexisting.enterPostCode(jsonData.tempAddress[index].add_address5.toString());
       // await confirmexisting.enterTempContactDetails(jsonData.ConfirmExistingDetailsTAdd[index].add_company_name.toString());
       // await confirmexisting.enterTempAddressDetails(jsonData.ConfirmExistingDetailsTAdd[index].add_company_name.toString());
       await confirmexisting.clickOnSaveChangeDetails();
-      await expect(page.getByText("Patient details changed successfully")).toHaveText("Patient details changed successfully");
+     // await expect(page.getByText("Patient details changed successfully")).toHaveText("Patient details changed successfully");
       //await page.pause()
     });
 

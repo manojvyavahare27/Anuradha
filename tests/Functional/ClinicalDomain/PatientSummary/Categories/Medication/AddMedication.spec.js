@@ -88,6 +88,7 @@ test.describe('Excel Conversion Medication Category', () => {
       logger.info("Clicked on Search button successfully");
       await patientsearch.enterGivenName(data.pat_firstname);
       logger.info("Given Name entered successfully");
+      //await page.pause()
       await patientsearch.enterFamilyName(data.pat_surname);
       logger.info("Family Name entered successfully");
       await patientsearch.selectSex(data.pat_sex);     
@@ -114,23 +115,50 @@ test.describe('Excel Conversion Medication Category', () => {
       await medicationEd.selectFrequency(jsonData.AddMedication[index].medi_frequency)  
       await medicationEd.selectRoute(jsonData.AddMedication[index].medi_route)
       await medicationEd.enterDays(jsonData.AddMedication[index].medi_duration.toString())
-      await medicationEd.enterMethod(jsonData.AddMedication[index].medi_method)
+      await medicationEd.selectSite(jsonData.AddMedication[index].meded_value)
+      await medicationEd.selectPrescribeBy(jsonData.AddMedication[index].medi_prescribed_by)
+      //await medicationEd.enterMethod(jsonData.AddMedication[index].medi_method)
+      
       await medicationEd.selectStartEndDate(jsonData.AddMedication[index].medi_start_date.toString(),jsonData.AddMedication[index].medi_stop_date.toString())  
-      // await medicationEd.selectSideEffect()
-      // await medicationEd.selectStatus()
-      // await medicationEd.selectIndication()
-      // await medicationEd.selectPGDPSD()
-      // await medicationEd.selectMedicationGradeForAdministrator()
-      // await medicationEd.selectMaxReffills()
-      // await medicationEd.enterQuantity()
-      // await medicationEd.enterUnit()
-      // await medicationEd.selectCurrentLocation()
+       await medicationEd.selectSideEffect(jsonData.AddMedication[index].mse_text)
+       await medicationEd.selectStatus(jsonData.AddMedication[index].pacr_status)
+       await medicationEd.selectIndication(jsonData.AddMedication[index].meded_value)
+       
+       await medicationEd.selectPGDPSD(jsonData.AddMedication[index].meded_value_PGD)
+       
+       await medicationEd.selectMedicationGradeForAdministrator(jsonData.AddMedication[index].meded_value_Administrator)
+       await medicationEd.selectMaxReffills(jsonData.AddMedication[index].meded_value_MaxReffills)
+       
+       await medicationEd.enterQuantity(jsonData.AddMedication[index].meded_value_Quantity.toString())       
+       await medicationEd.enterUnit(jsonData.AddMedication[index].meded_value_Unit)       
+       await medicationEd.selectCurrentLocation(jsonData.AddMedication[index].pcl_location_name)
       // await medicationEd.selectLinkToDiagnosis()
-      // await medicationEd.selectAdherent()
-      // await medicationEd.selectendoserment()
+      await medicationEd.selectAdherent(jsonData.AddMedication[index].meded_value_Adherent)
+      await medicationEd.checkAllCheckboxes()
+       await medicationEd.selectendoserment(jsonData.AddMedication[index].paprd_endorsement)
       // await medicationEd.selectForCondition()
-      // await medicationEd.selectPriceCheckQuantity()
-      // await medicationEd.enterTotalCost()
+       await medicationEd.selectPriceCheckQuantity(jsonData.AddMedication[index].meded_value_Price_check_quantity.toString())
+      await medicationEd.enterTotalCost(jsonData.AddMedication[index].paprd_cost.toString())
+      await medicationEd.enterNotes(jsonData.AddMedication[index].medi_notes)
+      await page.pause()
+      await medicationEd.clickOnSaveMedicationButton()
+      await page.waitForTimeout(2000)
+      await page.getByRole('button', { name: 'Save' }).click()
+      await expect(page.getByText('Medication added successfully')).toHaveText('Medication added successfully')     
+
+      
+      await medicationEd.expandAddedMedication()
+      await medicationEd.clickOnMedicationHistoryIcon()
+      //History of Medication
+      await medicationEd.clickOnExpandMedicationButton()
+      await medicationEd.closeMedicationHistoryPopup()
+      await medicationEd.clickOnMedicationReviewIcon()
+      await medicationEd.clickOnMedicationHighlisghtIcon()
+      
+
+
+
+
 
 
 

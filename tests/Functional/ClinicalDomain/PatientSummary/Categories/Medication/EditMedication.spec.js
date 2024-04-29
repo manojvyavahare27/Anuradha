@@ -91,7 +91,7 @@ test.describe('Excel Conversion Medication Category', () => {
       await patientsearch.enterFamilyName(data.pat_surname);
       logger.info("Family Name entered successfully");
       await patientsearch.selectSex(data.pat_sex);     
-      await page.pause()
+      
       await patientsearch.selectBornDate(jsonData.PatientDetails[index].pat_dob);
 	  //await patientsearch.selectBornDate(formattedDate);
       await patientsearch.clickOnSearchButton();
@@ -108,14 +108,14 @@ test.describe('Excel Conversion Medication Category', () => {
       //await page.pause()
       
       await medicationhome.clickOnEditMedicationButton()  
-
+      await page.pause()
       await medicationEd.enterDose(jsonData.EditMedication[index].medi_dose.toString())
       await medicationEd.selectFrequency(jsonData.EditMedication[index].medi_frequency)  
       //await medicationEd.selectRoute(jsonData.EditMedication[index].medi_route)
       await medicationEd.enterDays(jsonData.EditMedication[index].medi_duration.toString())
       await medicationEd.enterMethod(jsonData.EditMedication[index].medi_method)
       await medicationEd.selectStartEndDate(jsonData.EditMedication[index].medi_start_date.toString(),jsonData.EditMedication[index].medi_stop_date.toString())  
-    //   await medicationEd.selectSideEffect()
+       await medicationEd.selectSideEffect()
     //   await medicationEd.selectStatus()
     //   await medicationEd.selectIndication()
     //   await medicationEd.selectPGDPSD()

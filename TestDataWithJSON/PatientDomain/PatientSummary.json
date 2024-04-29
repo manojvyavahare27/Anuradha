@@ -13,10 +13,10 @@
     {
       "pat_hospital_ref": "hosp2305Id006",
       "pat_title": "B/O",
-      "pat_firstname": "detailsa",
+      "pat_firstname": "LinuxR",
       "pat_surname": "Riomedtest",
       "pat_sex": "M",
-      "pat_dob": "02/09/2023",
+      "pat_dob": "05/11/2023",
       "pat_marital_status": "Single",
       "pat_ethnicity_text": "Indian",
       "pat_occupation": "Trainer",
@@ -46,17 +46,30 @@
   "AddMedication": [
     {
       "pacr_category": "Medication",
-      "pacr_que_name": "Metformin 500mg tablets",
+      "pacr_que_name": "Aspirin 25mg capsules",
       "medi_dose": "2",
       "medi_frequency": "12 Hours",
       "medi_method": "Oral",
       "medi_route": "Oral",
       "medi_duration": "2",
+      "meded_value": "Left",
       "medi_start_date": "16/04/2024",
       "medi_stop_date": "18/04/2024",
-      "medi_status": "Current",
+      "pacr_status": "current",
       "medi_prescribed_by": "GP",
-      "medi_notes": "Added notes for testing"
+      "pcl_location_name": "Cardio Location",
+      "medi_notes": "Added notes for testing",
+      "medi_stopped_reason_eli_text": "Dose completed",
+      "mse_text": "Drowsiness",
+      "paprd_endorsement": "Yes",
+      "paprd_cost": "10",
+      "meded_value_Price_check_quantity": "2",
+      "meded_value_Administrator": "Administrator",
+      "meded_value_PGD": "PGD",
+      "meded_value_MaxReffills": 5,
+      "meded_value_Unit": "Tab",
+      "meded_value_Quantity": "3",
+      "meded_value_Adherent": "Adherent"
     }
   ],
   "EditMedication": [
@@ -75,5 +88,34 @@
       "medi_notes": "Updated notes for testing"
     }
   ],
-  "MedicationEDS": []
+  "MedicationEDS": [],
+  "AddExamination": [
+    {
+      "pacr_category": "Examination",
+      "pacr_que_name": "Dry eye",
+      "pacr_que_name_recommendation": "Rectoplasty",
+      "exam_outcome": "Normal",
+      "examed_value": 45407,
+      "exam_notes": "Added for Notes",
+      "eli_text": "Exm subsection",
+      "pacrd_subcategory_eli_code": "EX1008"
+    }
+  ],
+  "EditExamination": [
+    {
+      "pacr_category": "Examination",
+      "pacr_que_name": "Dry eye",
+      "pacr_que_name_recommendation": "Rectoplasty",
+      "exam_outcome": "Normal",
+      "examed_value": 45407,
+      "exam_notes": "Edited for Notes",
+      "pacr_delete_reason": "Delete for testing"
+    }
+  ],
+  "AddRecommendations": [
+    {
+      "pacr_category": "Recommendations",
+      "pacr_que_name": "Rectoplasty"
+    }
+  ]
 }

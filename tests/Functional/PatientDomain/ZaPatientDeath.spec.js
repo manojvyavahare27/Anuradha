@@ -64,20 +64,21 @@ const jsonData = JSON.parse(JSON.stringify(require("../../../TestDataWithJSON/Pa
     await loginpage.enterUsername(jsonData.loginDetails[0].username);    
     await loginpage.enter_Password(jsonData.loginDetails[0].password);   
     await loginpage.clickOnLogin();   
-    await page.pause()
+   // await page.pause()
     await homepage.clickOnPatientIcon()   
     await patientsearch.enterGivenName(jsonData.patDetails[index].pat_firstname);  
       await patientsearch.enterFamilyName(jsonData.patDetails[index].pat_surname);       
     await patientsearch.clickOnSearchButton()
     await patientsearch.clickOnSearchPatientLink()
     //await page.pause()
-    await page.pause()
+  
     //await patientsearch.ClickOnYesConfirmLegitimateRelationship()
     await confirmexisting.clickOnConfirmExistingDetails()    
     await topbluebar.clickOnTopBlueBar()
     await editpatient.clickOnPatientDetails()
     await editpatient.clickOnLinks()
     await editpatient.clickOnDeathLink()
+    await page.pause()
     await patientdeath.enterCauseOfDeathReason(jsonData.patCauseOfDeath[index].pod_cause)
     //await page.pause()
     await patientdeath.selectCheckBoxDeathCauseReason()
@@ -102,13 +103,9 @@ const jsonData = JSON.parse(JSON.stringify(require("../../../TestDataWithJSON/Pa
      const patId = results[0].pat_id;
      var match = await compareJsons(sqlFilePath, null, data);
      if (match) {
-         console.log(
-             "\n Patient Death Details Comparision: Parameters from both JSON files match!\n"
-         );
+        console.log("\n Patient Death Details Comparision: Parameters from both JSON files match!\n");
      } else {
-         console.log(
-             "\n Patient Death Details Comparision: Parameters from both JSON files do not match!\n"
-         );
+         console.log("\n Patient Death Details Comparision: Parameters from both JSON files do not match!\n");
      }
     
      
@@ -117,15 +114,12 @@ const jsonData = JSON.parse(JSON.stringify(require("../../../TestDataWithJSON/Pa
      var sqlFilePath = "SQLResults/PatientDomain/patientCauseOfDeath.json";
      var results = await executeQuery(sqlQuery, sqlFilePath);
      console.log("\n Patient Details stored into the database: \n", results);
-     var match = await compareJsons(sqlFilePath, null,jsonData.patOtherCauseOfDeath[index]);
-     if (match) {
-         console.log(
-             "\n Patient's Primary Cause of Death Comparision: Parameters from both JSON files match!\n"
-         );
+     var match = await compareJsons(sqlFilePath, null,jsonData.patCauseOfDeath[index]);
+     if (match)      
+     {
+         console.log("\n Patient's Primary Cause of Death Comparision: Parameters from both JSON files match!\n");
      } else {
-         console.log(
-             "\n Patient's Primary Cause of Death Comparision: Parameters from both JSON files do not match!\n"
-         );
+         console.log("\n Patient's Primary Cause of Death Comparision: Parameters from both JSON files do not match!\n");
      }
     
      

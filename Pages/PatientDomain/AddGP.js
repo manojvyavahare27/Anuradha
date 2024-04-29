@@ -151,6 +151,7 @@ class AddGP
     }
     async enterGpAddressNumberAndRoad(add_address1)
     {
+        await this.txtbox_GPNumberandRoad.fill("")
         await this.txtbox_GPNumberandRoad.fill(add_address1)
     }
     async enterGpAddressDistrict(add_address3)

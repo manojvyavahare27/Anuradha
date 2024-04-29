@@ -149,7 +149,7 @@ test.describe("Login Tests", () => {
     // await expect(page.getByText('Sex required')).toHaveText('Sex required')
     // await expect(page.getByText('Ethnicity required')).toHaveText('Ethnicity required')
     // await expect(page.getByText('Religion required')).toHaveText('Religion required')
-    await page.pause()
+   // await page.pause()
     await editpatient.selectSexualOrientation(jsonData.editPatient[index].pat_sexual_orientation_eli_text)
     //await editpatient.selectCurrentlyPrgenant(jsonData.editPatient[index].pat_currently_pregnant_yes)
     //await editpatient.selectSexDropdown()
@@ -165,7 +165,7 @@ test.describe("Login Tests", () => {
     await editpatient.clickOnSaveForPatientDetails() 
    // await expect(page.getByText('Patient address added successfully')).toHaveText('Patient address added successfully')
     await editpatient.clickOnPatientPIP()    
-    await page.pause()
+    //await page.pause()
     await editpatient.enterIntoSearchGP('Wednesday')
 
     await editpatient.clickOnViewPIPLink()
@@ -312,7 +312,7 @@ test.describe("Login Tests", () => {
   // Provide both file path to the compareJsons.js file
   //const jsonFilePath3 = 'C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientAddressData.json'; // Update with the actual file path
   match = 0;
-  match = await compareJsons(sqlFilePath, null, jsonData.pipAddress[index]);
+  match = await compareJsons(sqlFilePath, null, jsonData.permanentAddress[index]);
   if (match) {
     console.log(
       "\n PIP Permanent Address Details Comparision: Parameters from both JSON files match!\n"

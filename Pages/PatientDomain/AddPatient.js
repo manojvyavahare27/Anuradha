@@ -126,9 +126,9 @@ class AddPatient
         await this.txtbox_assistanceneeded.click()
         await this.txtbox_assistanceneeded.type(name)
     }
-    async enterDisablityNotes(name)
+    async enterDisablityNotes(pat_disability_note)
     {
-        await this.txtbox_DisabilityNotes.type(name)
+        await this.txtbox_DisabilityNotes.type(pat_disability_note)
     }
     async selectLanguage(pat_language)
     {
@@ -189,9 +189,9 @@ class AddPatient
         await this.dropdown_Patientwebregistration.click()
         await this.page.getByRole('option', { name: 'No', exact: true }).click()
     }
-    async enterNotes()
+    async enterNotes(pat_notes)
     {
-        await this.txtbox_Notes.type("Added for Testing")
+        await this.txtbox_Notes.type(pat_notes)
     }
     async clickOnAddPatientIdentifierButton()
     {

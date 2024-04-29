@@ -18,6 +18,7 @@ import PatientSearch from "../../../../../../Pages/PatientDomain/PatientSearch";
 import Environment from "../../../../../../Pages/BaseClasses/Environment";
 import Menu from "../../../../../../Pages/BaseClasses/Menu";
 import MedicationHomePage from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Medications/MedicationHomePage"
+import MedicationAddED from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Medications/MedicationAddED"
 
 import { TIMEOUT } from "dns";
 import { error } from "console";
@@ -33,7 +34,7 @@ import { before } from "node:test";
 const consoleLogs = [];
 let jsonData;
 
-test.describe('Excel Conversion', () => {
+test.describe('Excel Conversion Medication Category', () => {
     test('Extract Patient Summary Details', async ({}) => {
       const excelFilePath = process.env.EXCEL_FILE_PATH || './ExcelFiles/PatientSummary.xlsx';
       const jsonFilePath = "./TestDataWithJSON/PatientDomain/PatientSummary.json";
@@ -56,8 +57,8 @@ test.describe('Excel Conversion', () => {
  
 
 
-  test.describe('New Patient', () => {
-    test('Medication Category', async ({ page }) => {
+  test.describe('Medication Category', () => {
+    test('Edit Medication', async ({ page }) => {
       if (!jsonData || !jsonData.PatientDetails) {
         throw new Error('JSON data is missing or invalid.');
       }
@@ -71,6 +72,7 @@ test.describe('Excel Conversion', () => {
       const contacthistory = new ContactHistory(page);
       const patientsearch = new PatientSearch(page);
       const medicationhome=new MedicationHomePage(page)
+      const medicationEd=new MedicationAddED(page)
       
       const menu = new Menu(page);
       await page.goto(environment.Test);
@@ -89,7 +91,7 @@ test.describe('Excel Conversion', () => {
       await patientsearch.enterFamilyName(data.pat_surname);
       logger.info("Family Name entered successfully");
       await patientsearch.selectSex(data.pat_sex);     
-
+      
       await patientsearch.selectBornDate(jsonData.PatientDetails[index].pat_dob);
 	  //await patientsearch.selectBornDate(formattedDate);
       await patientsearch.clickOnSearchButton();
@@ -101,28 +103,19 @@ test.describe('Excel Conversion', () => {
       await contacthistory.clickOnMenuIcon()
       await page.waitForTimeout(2000)
       await contacthistory.clickOnMenuIcon()
-      
-
-      // const AddContactFlag= await page.locator("xpath=//div[contains(text(),'Add Contact')]").isVisible()
-      // if(AddContactFlag)
-      // {
-        await medicationhome.clickOnAddMedicationButton()
-      //}
-      // else{
+      await medicationhome.clickOnAddMedicationButton()      
       await contacthistory.clickOnMedicationCategoryIcon()
+      //await page.pause()
       
-      await medicationhome.expandsCategories()
-      await medicationhome.expandsCategories()
-      await medicationhome.clickOnLinkForMedicationHistory()      
-      await medicationhome.clickOnViewButton()
+      await medicationhome.clickOnEditMedicationButton()  
+      await medicationEd.clickOnDeleteMedicationButton()
+      await medicationEd.clickOnCancelDeleteMedicationButton()
+      await medicationEd.clickOnDeleteMedicationButton()
+      await medicationEd.clickOnOkDeleteMedication()
+      await medicationEd.enterDeleteMedicaionReason()
+      await page.pause()
       
-      await medicationhome.checkAllAppPopUp()
-      //await medicationhome.checkAllAppPopUp()
-      
-      
-      await menu.clickOnMenubtn();
-      await menu.clickOnLogout();
-    
+        
     }
 })
 })

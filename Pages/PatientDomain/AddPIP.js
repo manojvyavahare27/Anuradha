@@ -15,7 +15,7 @@ class AddPIP
         this.dropdown_PIPRelation=page.locator("xpath=//div[@aria-labelledby='mui-component-select-relationship']")                                     
         this.dropdownPIPNextOfkin=page.locator("xpath=//div[@aria-labelledby='mui-component-select-nextOfKin']")
         this.dropdownPIPFamilyAwareOfIllness=page.locator("xpath=//div[@aria-labelledby='mui-component-select-familyAwareOfIllness']")
-        this.dropdownPIPIdentifierType=page.locator("xpath=//div[@aria-labelledby='mui-component-select-identifierType']")
+        this.dropdownPIPIdentifierType=page.getByTestId('Identifier Type').getByLabel('​', { exact: true })
         this.txtboxPIPIdentifier=page.getByTestId('Identifier Number')
         this.txtbox_PIPEnternalProf=page.getByTestId('externalProfessional').getByLabel('External Professional')
         this.txtbox_PIPProfessionalTitle=page.getByTestId('Professional Title')
@@ -55,67 +55,68 @@ class AddPIP
     {
         await this.chkbox_AssistingInPartner.click()
     }
-    async enterPIPNotes()
+    async enterPIPNotes(pip_notes)
     {
-        await this.txtbox_PIPNotes.type("Added for testing")
+        await this.txtbox_PIPNotes.type(pip_notes)
     }
     async checkIsReferrer()
     {
         await this.chkbox_PIPIsReferrer.click()
     }
-    async checkSendPatientTextEmail()
+    async checkSendPatientTextEmail(pip_send_txt_email_yes)
     {
         await this.chkbox_SendPatientTextEmail.click()
+       // await this.page.getByRole('option',{ name: pip_send_txt_email_yes}).click()
     }
     async selectPIPPartnerDetailsOnRegForm()
     {
         await this.dropdown_PIPPrintPartnerdetailsOnReg.click()
-        await this.page.getByRole('option', { name: 'No' }).click()
+        //await this.page.getByRole('option', { name: 'No' }).click()
     }
-    async selectPIPReceiveAppointmentLetter()
+    async selectPIPReceiveAppointmentLetter(pip_receive_pat_appt_letter_no)
     {
         await this.dropdown_PIPReceiveAppointmentLtr.click()
-        await this.page.getByRole('option', { name: 'No' }).click()
+        await this.page.getByRole('option', { name: pip_receive_pat_appt_letter_no }).click()
     }
-    async selectPIPReceivePatientLetter()
+    async selectPIPReceivePatientLetter(pip_receive_patient_letter_no)
     {
         await this.dropdown_PIPReceivePatientLetter.click()
-        await this.page.getByRole('option', { name: 'No' }).click()
+        await this.page.getByRole('option', { name: pip_receive_patient_letter_no }).click()
     }
-    async enterProfessionalTitle(name)
+    async enterProfessionalTitle(pip_professional_title)
     {
-        await this.txtbox_PIPProfessionalTitle.type(name)
+        await this.txtbox_PIPProfessionalTitle.type(pip_professional_title)
     }
 
     async enterExternalProfessional(name)
     {
         await this.txtbox_PIPEnternalProf.type(name)
     }
-    async enterPIPIdentifier()
+    async enterPIPIdentifier(pip_identifier_number)
     {
-        await this.txtboxPIPIdentifier.type("AJAPV1448P")
+        await this.txtboxPIPIdentifier.type(pip_identifier_number)
     }
-    async selectPIPIdentifierType()
+    async selectPIPIdentifierType(pip_identifier_type)
     {
         await this.dropdownPIPIdentifierType.click()
-        await this.page.getByRole('option', { name: 'PAN Card' }).click()
+       await this.page.getByRole('option', { name: pip_identifier_type }).click()
     }
 
-    async SelectPIPFamilyAwareOfIllness()
+    async SelectPIPFamilyAwareOfIllness(pip_family_aware_illness_yes)
     {
         await this.dropdownPIPFamilyAwareOfIllness.click()
-        await this.page.getByRole('option', { name: 'Yes' }).click()
+        await this.page.getByRole('option', { name: pip_family_aware_illness_yes }).click()
     }
 
-    async selectPIPNextOfKin()
+    async selectPIPNextOfKin(pip_next_of_kin_Yes)
     {
         await this.dropdownPIPNextOfkin.click()
-        await this.page.getByRole('option', { name: 'No' }).click()
+        await this.page.getByRole('option', { name: pip_next_of_kin_Yes }).click()
     }
-    async selectPIPRelation()
+    async selectPIPRelation(pip_relationship)
     {
         await this.dropdown_PIPRelation.click()
-        await this.page.getByRole('option', { name: 'Brother' }).click()
+        await this.page.getByRole('option', { name: pip_relationship }).click()
     }
     async enterPIPEmailId(name)
     {
@@ -130,14 +131,14 @@ class AddPIP
         await this.dropdown_PIPOccupation.click()
         await this.page.getByRole('option', { name: 'Trainer', exact: true }).click()
     }
-    async selecrPIPEthnicity()
+    async selecrPIPEthnicity(pip_ethnicity_text)
     {
         await this.dropdown_PIPEthnicity.click()
-        await this.page.getByRole('option', { name: 'Indian', exact: true }).click()
+        await this.page.getByRole('option', { name: pip_ethnicity_text, exact: true }).click()
     }
-    async selectPIPBornDate()
+    async selectPIPBornDate(pip_dob)
     {
-        await this.calender_PIPBornDate.type("31/12/1992")
+        await this.calender_PIPBornDate.type(pip_dob)
     }
     async enterPIPMiddleName(pip_middlename)
     {

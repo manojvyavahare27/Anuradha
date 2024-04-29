@@ -17,23 +17,23 @@ import ContactHistory from "../../../../../../Pages/PatientDomain/ContactHistory
 import PatientSearch from "../../../../../../Pages/PatientDomain/PatientSearch";
 import Environment from "../../../../../../Pages/BaseClasses/Environment";
 import Menu from "../../../../../../Pages/BaseClasses/Menu";
-import MedicationHomePage from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Medications/MedicationHomePage"
+import ExaminationHomePage from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Examinations/ExaminationsHomePage"
+import ExaminationAddED from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Examinations/ExaminationAddED"
+import RecommendationHomePage from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Recommendations/RecommendationsHomepage"
+import RecommendationED from "../../../../../../Pages/ClinicalDomain/PatientSummary/Categories/Recommendations/RecommendationAddED"
+import PatientSummary from "../../../../../../Pages/ClinicalDomain/PatientSummary/PatientSummary"
 
 import { TIMEOUT } from "dns";
 import { error } from "console";
 import { before } from "node:test";
 
-// const logindata = JSON.parse(JSON.stringify(require("../../../TestData/PatientDomain/Login.json")));
-// const patientdetailsdata = JSON.parse(JSON.stringify(require("../../../TestData/PatientDomain/PatientDetails.json")));
-// const pipdetailsdata = JSON.parse(JSON.stringify(require("../../../TestData/PatientDomain/PIPDetails.json")));
-// const gpdata = JSON.parse(JSON.stringify(require("../../../TestData/PatientDomain/NewGPDetails.json")));
 
 // Array to store console logs
 
 const consoleLogs = [];
 let jsonData;
 
-test.describe('Excel Conversion', () => {
+test.describe('Excel Conversion Examination Category', () => {
     test('Extract Patient Summary Details', async ({}) => {
       const excelFilePath = process.env.EXCEL_FILE_PATH || './ExcelFiles/PatientSummary.xlsx';
       const jsonFilePath = "./TestDataWithJSON/PatientDomain/PatientSummary.json";
@@ -56,8 +56,8 @@ test.describe('Excel Conversion', () => {
  
 
 
-  test.describe('New Patient', () => {
-    test('Medication Category', async ({ page }) => {
+  test.describe('Examination Category', () => {
+    test('Add Examination', async ({ page }) => {
       if (!jsonData || !jsonData.PatientDetails) {
         throw new Error('JSON data is missing or invalid.');
       }
@@ -70,7 +70,11 @@ test.describe('Excel Conversion', () => {
       const confirmexisting = new ConfirmExisting(page);
       const contacthistory = new ContactHistory(page);
       const patientsearch = new PatientSearch(page);
-      const medicationhome=new MedicationHomePage(page)
+      const examinationhome=new ExaminationHomePage(page)
+      const examinationEd=new ExaminationAddED(page)
+      const recommendationhome=new RecommendationHomePage(page)
+      const recommendationEd=new RecommendationED(page)  
+      const patientsummary=new PatientSummary(page)
       
       const menu = new Menu(page);
       await page.goto(environment.Test);
@@ -86,6 +90,7 @@ test.describe('Excel Conversion', () => {
       logger.info("Clicked on Search button successfully");
       await patientsearch.enterGivenName(data.pat_firstname);
       logger.info("Given Name entered successfully");
+      //await page.pause()
       await patientsearch.enterFamilyName(data.pat_surname);
       logger.info("Family Name entered successfully");
       await patientsearch.selectSex(data.pat_sex);     
@@ -94,34 +99,67 @@ test.describe('Excel Conversion', () => {
 	  //await patientsearch.selectBornDate(formattedDate);
       await patientsearch.clickOnSearchButton();
       await patientsearch.clickOnSearchPatientLink()
-      await page.waitForTimeout(1000)
-     
-
+      await page.waitForTimeout(1000)     
       await confirmexisting.clickOnConfirmExistingDetails();
       await contacthistory.clickOnMenuIcon()
       await page.waitForTimeout(2000)
       await contacthistory.clickOnMenuIcon()
+      await page.pause()
+      //Add Recommendation
+      await patientsummary.clickOniconRecommendation()
+      const RecommendtionPresent=await page.locator("xpath=//h1[normalize-space()='Rectoplasty']").exists()
+
+        console.log(RecommendtionPresent);
+        if(RecommendtionPresent)
+        {
+          await recommendationhome.searchRecommendation(jsonData.AddRecommendation[index].pacr_que_name)
+          await recommendationhome.clickonAddRecommendationButton()
+          
+
+        }
+      //Contact History page
       
 
-      // const AddContactFlag= await page.locator("xpath=//div[contains(text(),'Add Contact')]").isVisible()
-      // if(AddContactFlag)
-      // {
-        await medicationhome.clickOnAddMedicationButton()
-      //}
-      // else{
-      await contacthistory.clickOnMedicationCategoryIcon()
+      await patientsummary.clickOniconExaminationsCategory()      
+      await page.waitForTimeout(1000)
+      await examinationhome.searchExamination(jsonData.AddExamination[index].pacr_que_name)
+      await examinationhome.clickonAddExaminationButton()      
+      await examinationEd.clickOnExpandExamination()      
+      //await examinationEd.selectSubCategory(jsonData.AddExamination[index].pacr_category)
+      await examinationEd.selectSubCategory()
+      //await examinationEd.EnterClinicalDate()  
+      await examinationEd.SelectOutcome(jsonData.AddExamination[index].exam_outcome)
+      await examinationEd.SelectRecommendation(jsonData.AddExamination[index].pacr_que_name_recommendation)
+      await examinationEd.selectCheckboxes()
+      await examinationEd.EnterNotes(jsonData.AddExamination[index].exam_notes)
+      //await page.pause()
+      await examinationEd.clickOnSaveButton()       
+      await page.waitForTimeout(500)      
+      await expect(page.getByText('Examination Record Added Successfully')).toHaveText('Examination Record Added Successfully')     
+      await examinationhome.expandExaminationHistory()
+      await examinationhome.expandExaminationHistory()
+      await examinationhome.clickOnAllLinks()
+     await examinationhome.clickOnHistoryIcon()
+     await examinationhome.expandsHistoryofExaminationIcon()
+     await examinationhome.expandsHistoryofExaminationIcon()
+     await examinationhome.closeExaminationHistoryPopup()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnReviewExaminationButton()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnHighlightedNoneRisk()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnLowRiskLevel()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnModerateRiskLevel()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnHighRiskLevel()
+     await page.waitForTimeout(2000)
+     await examinationhome.clickOnAllRiskLevel()
+     await page.waitForTimeout(1000)
+     await page.pause()
+     await examinationhome.checkExtradetailsLevel()
       
-      await medicationhome.expandsCategories()
-      await medicationhome.expandsCategories()
-      await medicationhome.clickOnLinkForMedicationHistory()      
-      await medicationhome.clickOnViewButton()
-      
-      await medicationhome.checkAllAppPopUp()
-      //await medicationhome.checkAllAppPopUp()
-      
-      
-      await menu.clickOnMenubtn();
-      await menu.clickOnLogout();
+     await page.pause()
     
     }
 })

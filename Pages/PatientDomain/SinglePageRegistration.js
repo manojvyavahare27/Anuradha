@@ -20,6 +20,10 @@ class SinglePageRegistration
         this.dropdown_Occupation=page.locator("xpath=//div[@aria-labelledby='mui-component-select-occupation']")
         this.dropdown_Nationality=page.locator("xpath=//div[@aria-labelledby='mui-component-select-nationality']")
         this.txtbox_RoadAndNo=page.getByTestId('Number & Road')
+        this.txtbox_Town=page.locator("xpath=//input[@aria-label='Town']")
+        this.txtbox_District=page.locator("xpath=//input[@aria-label='District']")
+        this.txtbox_County=page.locator("xpath=//input[@aria-label='County']")
+        this.txtbox_Postcode=page.locator("xpath=//input[@aria-label='Postcode']")
         this.txtbox_Country=page.getByTestId('Country')
         this.dropdown_PrimaryDisablity=page.getByTestId('Primary Disability').getByRole('button', { name: '​' })
         this.btn_Save=page.getByTestId('Save')
@@ -34,14 +38,32 @@ class SinglePageRegistration
     {
         await this.btn_Save.click()
     }
-    async enterCountry()
+   
+    async enterRoadAndNo(add_address1)
     {
-        await this.txtbox_Country.type("India")
-    }
-    async enterRoadAndNo()
+      await this.txtbox_RoadAndNo.type(add_address1)
+    }    
+    async enterTown(add_address3)
     {
-      await this.txtbox_RoadAndNo.type("15 number")
+        await this.txtbox_Town.type(add_address3)
     }
+    async enterDistrict(add_address2)
+    {
+        await this.txtbox_District.type(add_address2)
+    }
+    async enterCounty(add_address4)
+    {
+        await this.txtbox_County.type(add_address4)
+    }
+    async enterPostCode(add_address5)
+    {
+        await this.txtbox_Postcode.type(add_address5)
+    }
+    async enterCountry(add_address6)
+    {
+        await this.txtbox_Country.type(add_address6)
+    }
+
     async selectNationality(pat_nationality)
     {
         await this.dropdown_Nationality.click()
@@ -73,10 +95,10 @@ class SinglePageRegistration
         await this.dropdown_MethodOfArrival.click()
         await this.page.getByRole('option', { name: ref_method_of_arrival }).click()
     }
-    async SelectCountryOfBirth()
+    async SelectCountryOfBirth(pat_country_of_birth)
     {
         await this.dropdown_CountyOfBirth.click()
-        await this.page.getByRole('option', { name: 'India', exact: true }).click()
+        await this.page.getByRole('option', { name: pat_country_of_birth, exact: true }).click()
     }
     async selectAppointmentType()
     {

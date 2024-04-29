@@ -175,7 +175,7 @@ test.describe('Excel Conversion', () => {
         //
         //await addpatient.selectPrimaryDisablity()
         //await addpatient.enterAssestanceNeeded(patientdetailsdata.AssistanceNeeded)
-        await addpatient.enterDisablityNotes(patientdetailsdata.DisablityNotes);
+        await addpatient.enterDisablityNotes(jsonData.addPatient[index].pat_disability_note);
         await addpatient.selectLanguage(jsonData.addPatient[index].pat_language);
         //await addpatient.selectInterpreterNeeded()
         //await addpatient.selectInterpreterType()
@@ -186,16 +186,14 @@ test.describe('Excel Conversion', () => {
         //await addpatient.enterPASId(patientdetailsdata.PASId)
 
         await addpatient.selectPatientType(jsonData.addPatient[index].pat_type);
-        await addpatient.selectPrisoner(jsonData.addPatient[index].pat_prisoner_yes);
-        //await page.pause()
+        await addpatient.selectPrisoner(jsonData.addPatient[index].pat_prisoner_yes);       
         await addpatient.selectBloodType(jsonData.addPatient[index].pat_blood_group);
         await addpatient.selectRestrictedRegistration();
         await addpatient.selectPatientWebRegistration();
-        await addpatient.enterNotes();
+        await addpatient.enterNotes(jsonData.addPatient[index].pat_notes);
         await addpatient.clickOnNextButton();
 
-        //Add Address page
-        //await page.pause();
+        //Add Address page        
         await addaddress.clickOnSaveButton();
         await addaddress.enterNumberAndRoad(jsonData.permanentAddress[index].add_address1);
         await addaddress.enterTownInAddress(jsonData.permanentAddress[index].add_address3);
@@ -205,8 +203,8 @@ test.describe('Excel Conversion', () => {
         await addaddress.clickOnFindPostCode();
         await addaddress.enterCountryonPopup(jsonData.permanentAddress[index].add_address6.toString());
         await addaddress.clickOnSaveButtonOnPopup();
-        //Permanent Address
-        
+
+        //Permanent Address        
         await addaddress.enterPermISOCountryCode(jsonData.permanentAddress[index].add_iso_country_code.toString());
         await addaddress.enterPermICAOCode(jsonData.permanentAddress[index].add_icao_country_code.toString());
         await addaddress.enterPremPhone(jsonData.permanentAddress[index].add_phone.toString());
@@ -256,32 +254,32 @@ test.describe('Excel Conversion', () => {
         //await expect(page.getByText('Patient address added successfully')).toHaveText('Patient address added successfully')
 
         //Add PIP
-        //await page.pause()
+       // await page.pause()
         await addpip.selectPIPTitle(jsonData.pip[index].pip_title);
         await addpip.enterPIPFamilyName(jsonData.pip[index].pip_surname);
         await addpip.enterPIPGivenName(jsonData.pip[index].pip_firstname);
         await addpip.enterPIPMiddleName(jsonData.pip[index].pip_middlename);
-        await addpip.selectPIPBornDate();
+        await addpip.selectPIPBornDate(jsonData.pip[index].pip_dob);
 
-        await addpip.selecrPIPEthnicity();
+        await addpip.selecrPIPEthnicity(jsonData.pip[index].pip_ethnicity_text);
         await addpip.selectPIPOccupation();
-        await addpip.enterPIPMobileNumber(pipdetailsdata.MobileNo);
-        await addpip.enterPIPEmailId(pipdetailsdata.Email);
-        await addpip.selectPIPRelation();
-        await addpip.selectPIPNextOfKin();
-        await addpip.SelectPIPFamilyAwareOfIllness();
-
-        //await addpip.selectPIPIdentifierType()
-        // await addpip.enterPIPIdentifier()
-        await addpip.enterExternalProfessional(pipdetailsdata.ExternalProfessional);
-        //await page.pause()
-        await addpip.enterProfessionalTitle(pipdetailsdata.PIPTitle);
-        await addpip.selectPIPReceivePatientLetter();
-        await addpip.selectPIPReceiveAppointmentLetter();
-        await addpip.selectPIPPartnerDetailsOnRegForm();
-        await addpip.checkSendPatientTextEmail();
+        // await addpip.enterPIPMobileNumber(pipdetailsdata.MobileNo);
+        // await addpip.enterPIPEmailId(pipdetailsdata.Email);
+        await addpip.selectPIPRelation(jsonData.pip[index].pip_relationship);
+        await addpip.selectPIPNextOfKin(jsonData.pip[index].pip_next_of_kin_Yes);
+        await addpip.SelectPIPFamilyAwareOfIllness(jsonData.pip[index].pip_family_aware_illness_yes);
+       // await page.pause()
+         await addpip.selectPIPIdentifierType(jsonData.pip[index].pip_identifier_type)
+        await addpip.enterPIPIdentifier(jsonData.pip[index].pip_identifier_number.toString())
+       // await addpip.enterExternalProfessional(pipdetailsdata.ExternalProfessional);
+        
+        await addpip.enterProfessionalTitle(jsonData.pip[index].pip_professional_title);
+        await addpip.selectPIPReceivePatientLetter(jsonData.pip[index].pip_receive_patient_letter_no);
+        await addpip.selectPIPReceiveAppointmentLetter(jsonData.pip[index].pip_receive_pat_appt_letter_no);
+        //await addpip.selectPIPPartnerDetailsOnRegForm();
+        await addpip.checkSendPatientTextEmail(jsonData.pip[index].pip_send_txt_email_yes);
         await addpip.checkIsReferrer();
-        await addpip.enterPIPNotes();
+        await addpip.enterPIPNotes(jsonData.pip[index].pip_notes);
         await addpip.checkcAssistingInPartner();
         await addpip.checkHelpingPatients();
         await addpip.checkBeingPhotographed();
@@ -305,7 +303,7 @@ test.describe('Excel Conversion', () => {
         await addgp.clickOnAddGPBtn();
 
         // Add GP
-        //await page.pause()
+       // await page.pause()
         await addgp.enterGPTitle(jsonData.addGP[index].egp_title);
         await addgp.enterGPInitials(jsonData.addGP[index].egp_initials);
         await addgp.enterGPGivenName(jsonData.addGP[index].egp_first_name);
@@ -317,8 +315,9 @@ test.describe('Excel Conversion', () => {
         await addgp.clickOnShowbnt();
         await addgp.selectUnknownPostCode();
         //Gp Address Details
-        //await page.pause()
+        await page.pause()
         await addgp.enterLocalGPPostcode()
+        await page.waitForTimeout(1000)
         await addgp.enterGpAddressNumberAndRoad(jsonData.gpAddress[index].add_address1)
         await addgp.enterGpAddressDistrict(jsonData.gpAddress[index].add_address3)
         await addgp.enterGpAddressTown(jsonData.gpAddress[index].add_address2)
@@ -348,76 +347,20 @@ test.describe('Excel Conversion', () => {
       // await page.getByTestId('Save').click()
         await addgp.clickOnNextButtonOnSearchGp();
         // await page.waitForTimeout(3000);
-        //await page.pause();
+        
 
         // Print Id Card
-        await page.getByTestId('Print Id Card').click()
-        // Get the upload input element
+       // await page.getByTestId('Print Id Card').click()        
         const fileInput = await page.$("input[type=file]");
-        // Set the file to upload
-        const filePath = "../Cellma4Automation/UploadPics/Patient.png";
-        // Upload the file
+        const filePath = "../Cellma4Automation/UploadPics/Patient.png";        
         await fileInput.setInputFiles(filePath);
         await page.getByTestId("Upload").click();
         await page.waitForTimeout(1000);
-
         //await expect(page.getByText('Patient photo uploaded successfully')).toHaveText('Patient photo uploaded successfully')
         await printidcard.clickOnSavebtn();
         await page.waitForTimeout(2000);
 
-        // //////// Patient Detail comparison/////////
-
-        // // select add_email, add_mobile, add_phone,pat_name_other_lang, pat_need_interpreter_at_appointments from patients join addresses on pat_add_id = add_id where pat_id = 787310;
-        // const query = "select * from patients where pat_hospital_ref= '"+data.pat_hospital_ref+"' order by pat_id desc limit 1"
-        // const patSqlFile='C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientData.json'
-        // const results = await executeQuery(query,patSqlFile);
-        // console.log('\n Patient Details stored into the database: \n', results);
-        // const patId=results[0].pat_id;
-        // const jsonFilePath1 = 'C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientData.json';
-        // var match1 = await compareJsons(jsonFilePath1, null, data);
-        // if (match1) {
-        // 	console.log('\n Patient Details Comparision: Parameters from both JSON files match!\n');
-        // } else {
-        // 	console.log('\n Patient Details Comparision: Parameters from both JSON files do not match!\n');
-        // }
-
-        // //////// Patient UNique Identifier comparison/////////
-
-        // const queryI = "Select pid_value from patient_identifiers where pid_pat_id="+patId;
-        // const patSqlFileI='C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientIData.json'
-        // const resultsI = await executeQuery(queryI,patSqlFileI);
-        // var match3=0
-        // if(resultsI[0].pid_value==jsonData.AddNewPatient[index].pid_value1)
-        // {
-        // 	if(resultsI[1].pid_value==jsonData.AddNewPatient[index].pid_value2)
-        // 	match3=1
-        // }
-        // else if(resultsI[0].pid_value==jsonData.AddNewPatient[index].pid_value2)
-        // {
-        // 	if(resultsI[1].pid_value==jsonData.AddNewPatient[index].pid_value1)
-        // 	match3=1
-        // }
-        // if (match3) {
-        // 	console.log('\n Patient Identifier Comparision: Parameters from both JSON files match!\n');
-        // } else {
-        // 	console.log('\n Patient Identifier Comparision: Parameters from both JSON files do not match!\n');
-        // }
-
-        // //////// Address Detail comparison/////////
-        // const query1 = "select * from addresses where add_pat_id="+patId+" and add_temp_permanent='P' order by add_id limit 1"
-        // const patSqlFile1='C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientAddressData.json'
-        // const results1 = await executeQuery(query1,patSqlFile1);
-        // console.log('\n Address Details stored into the database: \n', results1);
-        // // Option 1: Provide a second JSON file path
-        // // Provide both file path to the compareJsons.js file
-        // const jsonFilePath3 = 'C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientAddressData.json'; // Update with the actual file path
-        // const match2 = await compareJsons(jsonFilePath3, null, jsonData.AddAddress[index]);
-        // if (match2) {
-        // 	console.log('\n Address Details Comparision: Parameters from both JSON files match!\n');
-        // } else {
-        // 	console.log('\n Address Details Comparision: Parameters from both JSON files do not match!\n');
-        // }
-
+          
         //////// Patient Detail comparison/////////
         var sqlQuery =
           "select * from patients where pat_hospital_ref= '" +
@@ -446,29 +389,19 @@ test.describe('Excel Conversion', () => {
         sqlFilePath = "SQLResults/PatientDomain/patientIData.json";
         results = await executeQuery(sqlQuery, sqlFilePath);
         match = 0;
-        if (
-          results[0].pid_value == jsonData.patientIdentifier[index].pid_value1
-        ) {
-          if (
-            results[1].pid_value == jsonData.patientIdentifier[index].pid_value2
-          )
+        if (results[0].pid_value == jsonData.patientIdentifier[index].pid_value1)
+         {
+          if (results[1].pid_value == jsonData.patientIdentifier[index].pid_value2)
             match = 1;
-        } else if (
-          results[0].pid_value == jsonData.patientIdentifier[index].pid_value2
-        ) {
-          if (
-            results[1].pid_value == jsonData.patientIdentifier[index].pid_value1
-          )
+        } else if (results[0].pid_value == jsonData.patientIdentifier[index].pid_value2) 
+        {
+          if (results[1].pid_value == jsonData.patientIdentifier[index].pid_value1)
             match = 1;
         }
         if (match) {
-          console.log(
-            "\n Patient Identifier Comparision: Parameters from both JSON files match!\n"
-          );
+          console.log("\n Patient Identifier Comparision: Parameters from both JSON files match!\n");
         } else {
-          console.log(
-            "\n Patient Identifier Comparision: Parameters from both JSON files do not match!\n"
-          );
+          console.log("\n Patient Identifier Comparision: Parameters from both JSON files do not match!\n");
         }
 
         //////// Permanent Address Detail comparison/////////
@@ -480,11 +413,7 @@ test.describe('Excel Conversion', () => {
         // Provide both file path to the compareJsons.js file
         //const jsonFilePath3 = 'C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientAddressData.json'; // Update with the actual file path
         match = 0;
-        match = await compareJsons(
-          sqlFilePath,
-          null,
-          jsonData.permanentAddress[index]
-        );
+        match = await compareJsons(sqlFilePath,null,jsonData.permanentAddress[index]);
         if (match) {
           console.log("\n Patient Permanent Address Details Comparision: Parameters from both JSON files match!\n");
         } else {
@@ -492,10 +421,7 @@ test.describe('Excel Conversion', () => {
         }
 
         //////// Temporary Address Detail comparison/////////
-        sqlQuery =
-          "select * from addresses where add_pat_id=" +
-          patId +
-          " and add_temp_permanent='T' order by 1 desc limit 1;";
+        sqlQuery ="select * from addresses where add_pat_id=" + patId +" and add_temp_permanent='T' order by 1 desc limit 1;";
         sqlFilePath = "SQLResults/PatientDomain/patientTempAddressData.json";
         results = await executeQuery(sqlQuery, sqlFilePath);
         console.log("\n Address Details stored into the database: \n", results);
@@ -511,8 +437,7 @@ test.describe('Excel Conversion', () => {
         }
 
         //////// PIP Detail comparison/////////
-        sqlQuery =
-          "select * from patient_interested_parties where pip_pat_id=" + patId;
+        sqlQuery ="select * from patient_interested_parties where pip_pat_id=" + patId;
         sqlFilePath = "SQLResults/PatientDomain/patientPIPData.json";
         results = await executeQuery(sqlQuery, sqlFilePath);
         const pipAddId = results[0].pip_add_id;
@@ -523,13 +448,9 @@ test.describe('Excel Conversion', () => {
         match = 0;
         match = await compareJsons(sqlFilePath, null, jsonData.pip[index]);
         if (match) {
-          console.log(
-            "\n PIP Details Comparision: Parameters from both JSON files match!\n"
-          );
+          console.log("\n PIP Details Comparision: Parameters from both JSON files match!\n");
         } else {
-          console.log(
-            "\n PIP Details Comparision: Parameters from both JSON files do not match!\n"
-          );
+          console.log("\n PIP Details Comparision: Parameters from both JSON files do not match!\n");
         }
 
         //////// PIP Address Detail comparison/////////
@@ -541,15 +462,13 @@ test.describe('Excel Conversion', () => {
         // Provide both file path to the compareJsons.js file
         //const jsonFilePath3 = 'C:\\Riomed\\Cellma4Automation\\SQLResults\\PatientDomain\\patientAddressData.json'; // Update with the actual file path
         match = 0;
-        match = await compareJsons(sqlFilePath, null, jsonData.pipAddress[index]);
+        // match = await compareJsons(sqlFilePath, null, jsonData.pipAddress[index]);
+        
+        match = await compareJsons(sqlFilePath, null, jsonData.permanentAddress[index]);
         if (match) {
-          console.log(
-            "\n PIP Permanent Address Details Comparision: Parameters from both JSON files match!\n"
-          );
+          console.log("\n PIP Permanent Address Details Comparision: Parameters from both JSON files match!\n");
         } else {
-          console.log(
-            "\n PIP Permanent Address Details Comparision: Parameters from both JSON files do not match!\n"
-          );
+          console.log("\n PIP Permanent Address Details Comparision: Parameters from both JSON files do not match!\n");
         }
 
         //////// Added GP Detail comparison/////////
@@ -590,29 +509,23 @@ test.describe('Excel Conversion', () => {
         match = 0;
         match = await compareJsons(sqlFilePath, null, jsonData.gpAddress[index]);
         if (match) {
-          console.log(
-            "\n Patient GP Address comparison: Parameters from both JSON files match!\n"
-          );
+          console.log("\n Patient GP Address comparison: Parameters from both JSON files match!\n");
         } else {
-          console.log(
-            "\n Patient GP Address comparison: Parameters from both JSON files do not match!\n"
-          );
+          console.log("\n Patient GP Address comparison: Parameters from both JSON files do not match!\n");
         }
         await menu.clickOnMenubtn();
         await menu.clickOnLogout();
         //Listen for console events
         page.on("console", async (msg) => {
-          const args = await Promise.all(
-            msg.args().map((arg) => arg.jsonValue())
-          );
+          const args = await Promise.all(msg.args().map((arg) => arg.jsonValue()));
           consoleLogs.push({
             type: msg.type(),
             text: args.join(" "),
           });
         });
 
-        // await menu.clickOnMenubtn()
-        // await menu.clickOnLogout()
+        //  await menu.clickOnMenubtn()
+        //  await menu.clickOnLogout()
         // Listen for console events
         page.on("console", async (msg) => {
           const args = await Promise.all(
@@ -623,23 +536,6 @@ test.describe('Excel Conversion', () => {
             text: args.join(" "),
           });
         });
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        // Array to store console logs
-        // const consoleLogs = [];
-        // // Listen for console events and store logs
-        // page.on('console', async msg => {
-        //     const args = await Promise.all(msg.args().map(arg => arg.jsonValue()));
-        //     consoleLogs.push({ type: msg.type(), message: args.join(' ') });
-        // });
-        // } catch (error) {
-        //     console.error('Error during test:', error);
-        // } finally {
-        //     //await browser.close();
-        //     const htmlContent = generateHTMLReport(consoleLogs);
-        //     fs.writeFileSync('playwright_report.html', htmlContent);
-        //     console.log('HTML report generated: playwright_report.html');
-        // }
       index++
       }})
     })
